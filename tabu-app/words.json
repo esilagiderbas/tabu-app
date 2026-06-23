@@ -1,0 +1,90 @@
+[
+  {
+    "id": "ex-1",
+    "main": "Sigma",
+    "forbidden": [
+      "Erkek",
+      "Alfa",
+      "Lider",
+      "Bağımsız",
+      "Güçlü"
+    ]
+  },
+  {
+    "id": "ex-2",
+    "main": "Rizz",
+    "forbidden": [
+      "Çekicilik",
+      "Flört",
+      "Karizma",
+      "Sevdirmek",
+      "Sözler"
+    ]
+  },
+  {
+    "id": "ex-3",
+    "main": "Gaslighting",
+    "forbidden": [
+      "Manipülasyon",
+      "Yalan",
+      "İnandırmak",
+      "Gerçek",
+      "Kafa karıştırmak"
+    ]
+  },
+  {
+    "id": "ex-4",
+    "main": "Cringe",
+    "forbidden": [
+      "Utanç",
+      "Garip",
+      "Rezil",
+      "Tüyler",
+      "Komik"
+    ]
+  },
+  {
+    "id": "ex-5",
+    "main": "Algoritma",
+    "forbidden": [
+      "Instagram",
+      "TikTok",
+      "Öneri",
+      "Veri",
+      "Telefon"
+    ]
+  },
+  {
+    "id": "ex-6",
+    "main": "Story atmak",
+    "forbidden": [
+      "Instagram",
+      "Paylaşmak",
+      "Fotoğraf",
+      "24 saat",
+      "Görmek"
+    ]
+  },
+  {
+    "id": "ex-7",
+    "main": "Ghost etmek",
+    "forbidden": [
+      "Mesaj",
+      "Yanıt",
+      "Kaybolmak",
+      "Sevgili",
+      "Cevapsız"
+    ]
+  },
+  {
+    "id": "ex-8",
+    "main": "Sahte gündem",
+    "forbidden": [
+      "Twitter",
+      "Trend",
+      "Yapay",
+      "Magazin",
+      "Manşet"
+    ]
+  }
+]

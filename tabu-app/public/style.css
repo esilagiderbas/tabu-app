@@ -1,0 +1,478 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --peach: #FFE8D6;
+  --lavender: #E8D5F2;
+  --ink: #1E1B2E;
+  --ink-soft: #635D78;
+  --purple: #7C3AED;
+  --purple-deep: #5B21B6;
+  --green: #10B981;
+  --green-deep: #059669;
+  --red: #EF4444;
+  --red-deep: #B91C1C;
+  --amber: #F59E0B;
+  --paper: #FFFFFF;
+  --paper-tint: #FBF8FF;
+  --tape: #FFD166;
+  --shadow: 0 10px 30px -10px rgba(94, 51, 153, 0.25);
+  --shadow-lg: 0 20px 50px -15px rgba(94, 51, 153, 0.35);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: var(--ink);
+  background: linear-gradient(135deg, var(--peach) 0%, #FBE0E8 45%, var(--lavender) 100%);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 16px 48px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Ambient dekoratif şekiller */
+body::before, body::after {
+  content: '';
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.35;
+  z-index: 0;
+  pointer-events: none;
+}
+body::before {
+  width: 380px; height: 380px;
+  background: var(--amber);
+  top: -120px; left: -120px;
+}
+body::after {
+  width: 420px; height: 420px;
+  background: var(--purple);
+  bottom: -150px; right: -120px;
+  opacity: 0.25;
+}
+
+.app {
+  width: 100%;
+  max-width: 560px;
+  position: relative;
+  z-index: 1;
+}
+
+h1, h2, h3, .scrawl {
+  font-family: 'Caveat', cursive;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* ---------- Üst başlık ---------- */
+.brand {
+  text-align: center;
+  margin-bottom: 28px;
+}
+.brand h1 {
+  font-size: 56px;
+  margin: 0;
+  color: var(--purple-deep);
+  transform: rotate(-2deg);
+  display: inline-block;
+}
+.brand .sub {
+  font-size: 15px;
+  color: var(--ink-soft);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  margin-top: 2px;
+}
+
+/* ---------- Kart genel ---------- */
+.panel {
+  background: var(--paper);
+  border-radius: 24px;
+  padding: 28px 24px;
+  box-shadow: var(--shadow);
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.tape {
+  position: absolute;
+  width: 90px;
+  height: 30px;
+  background: repeating-linear-gradient(135deg, var(--tape), var(--tape) 6px, #FFE69E 6px, #FFE69E 12px);
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-3deg);
+  opacity: 0.9;
+  border-radius: 3px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+/* ---------- Butonlar ---------- */
+button {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+}
+button:active { transform: scale(0.97); }
+
+.btn {
+  padding: 14px 20px;
+  border-radius: 16px;
+  font-size: 16px;
+  width: 100%;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--purple), var(--purple-deep));
+  color: white;
+  box-shadow: 0 8px 20px -6px rgba(124, 58, 237, 0.5);
+}
+.btn-primary:hover { filter: brightness(1.08); }
+.btn-secondary {
+  background: var(--paper-tint);
+  color: var(--purple-deep);
+  border: 2px solid #EDE4FB;
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--ink-soft);
+  text-decoration: underline;
+  width: auto;
+  padding: 8px;
+}
+
+/* ---------- Form elemanları ---------- */
+input[type="text"], input[type="number"] {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  border: 2px solid #EDE4FB;
+  border-radius: 14px;
+  padding: 12px 16px;
+  font-size: 16px;
+  width: 100%;
+  background: var(--paper-tint);
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+input:focus { border-color: var(--purple); }
+
+label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* ---------- Seçim çipleri (süre, tabu hakkı vs) ---------- */
+.chip-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.chip {
+  padding: 10px 18px;
+  border-radius: 100px;
+  background: var(--paper-tint);
+  border: 2px solid #EDE4FB;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.chip.active {
+  background: var(--purple);
+  border-color: var(--purple);
+  color: white;
+  box-shadow: 0 6px 14px -4px rgba(124, 58, 237, 0.5);
+}
+
+/* ---------- Oyun kartı (kelime) ---------- */
+.game-card {
+  background: var(--paper);
+  border-radius: 28px;
+  padding: 36px 28px 28px;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  transform: rotate(-1deg);
+  margin: 8px 0 24px;
+}
+.game-card .main-word {
+  font-family: 'Caveat', cursive;
+  font-size: 52px;
+  font-weight: 700;
+  text-align: center;
+  color: var(--purple-deep);
+  margin: 4px 0 20px;
+  line-height: 1.1;
+}
+.forbidden-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.forbidden-item {
+  background: #FFF1F1;
+  border: 2px dashed #FCA5A5;
+  color: var(--red-deep);
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  text-align: center;
+}
+
+/* ---------- İzleyici kartı (anlatıcı olmayanlar için) ---------- */
+.watching-card {
+  text-align: center;
+  background: var(--paper-tint);
+}
+.watching-icon {
+  font-size: 48px;
+  margin-bottom: 8px;
+}
+.watching-text {
+  font-family: 'Caveat', cursive;
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--purple-deep);
+}
+.watching-sub {
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin-top: 6px;
+}
+
+/* ---------- Oyuncu listesi (lobi) ---------- */
+.player-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.player-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 700;
+}
+.player-chip.team-a { background: #EDE4FB; color: var(--purple-deep); }
+.player-chip.team-b { background: #FFE8E8; color: var(--red-deep); }
+.player-chip .host-star { font-size: 12px; }
+
+/* ---------- Timer ---------- */
+.timer-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.timer {
+  font-family: 'Caveat', cursive;
+  font-size: 44px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.timer.urgent { color: var(--red); animation: pulse 1s infinite; }
+@keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+
+/* ---------- Aksiyon butonları (oyun ekranı) ---------- */
+.action-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.action-row.three { grid-template-columns: 1fr 1fr 1fr; }
+.btn-correct {
+  background: linear-gradient(135deg, var(--green), var(--green-deep));
+  color: white;
+  box-shadow: 0 8px 20px -6px rgba(16, 185, 129, 0.5);
+}
+.btn-tabu {
+  background: linear-gradient(135deg, var(--red), var(--red-deep));
+  color: white;
+  box-shadow: 0 8px 20px -6px rgba(239, 68, 68, 0.5);
+}
+.btn-pass {
+  background: var(--amber);
+  color: white;
+  box-shadow: 0 8px 20px -6px rgba(245, 158, 11, 0.5);
+}
+.btn-pass:disabled, .action-row button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ---------- Skor tablosu ---------- */
+.score-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+.score-team {
+  text-align: center;
+  flex: 1;
+}
+.score-team .name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.score-team .num {
+  font-family: 'Caveat', cursive;
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.score-team.active .num { color: var(--purple-deep); }
+.score-team .tabus {
+  font-size: 12px;
+  color: var(--red);
+  font-weight: 700;
+}
+.vs {
+  font-family: 'Caveat', cursive;
+  font-size: 22px;
+  color: var(--ink-soft);
+  padding: 0 8px;
+}
+
+/* ---------- Oda kodu kutusu ---------- */
+.room-code-box {
+  text-align: center;
+  background: linear-gradient(135deg, var(--purple), var(--purple-deep));
+  border-radius: 20px;
+  padding: 20px;
+  color: white;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+}
+.room-code-box .label {
+  font-size: 13px;
+  opacity: 0.85;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.room-code-box .code {
+  font-family: 'Caveat', cursive;
+  font-size: 52px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+.room-code-box .hint {
+  font-size: 13px;
+  opacity: 0.85;
+  margin-top: 4px;
+}
+
+/* ---------- Kelime listesi yönetimi ---------- */
+.word-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 14px;
+  background: var(--paper-tint);
+  border-radius: 14px;
+  margin-bottom: 8px;
+}
+.word-row .info .main { font-weight: 700; font-size: 15px; }
+.word-row .info .forb { font-size: 12px; color: var(--ink-soft); margin-top: 2px; }
+.word-row .delete-btn {
+  background: none;
+  color: var(--red);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 6px 10px;
+  width: auto;
+}
+
+.forbidden-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+/* ---------- Genel yardımcılar ---------- */
+.center { text-align: center; }
+.mt-8 { margin-top: 8px; }
+.mt-16 { margin-top: 16px; }
+.mt-24 { margin-top: 24px; }
+.mb-16 { margin-bottom: 16px; }
+.hidden { display: none !important; }
+.section-title {
+  font-family: 'Caveat', cursive;
+  font-size: 30px;
+  color: var(--purple-deep);
+  margin: 0 0 14px;
+}
+.divider {
+  height: 2px;
+  background: repeating-linear-gradient(90deg, #EDE4FB, #EDE4FB 6px, transparent 6px, transparent 12px);
+  margin: 20px 0;
+}
+.small-note {
+  font-size: 13px;
+  color: var(--ink-soft);
+  text-align: center;
+}
+
+.log-list {
+  max-height: 160px;
+  overflow-y: auto;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+.log-list .log-item { padding: 4px 0; }
+.log-item.correct { color: var(--green-deep); }
+.log-item.tabu { color: var(--red-deep); }
+.log-item.pass { color: var(--amber); }
+
+.winner-banner {
+  text-align: center;
+  font-family: 'Caveat', cursive;
+  font-size: 44px;
+  color: var(--purple-deep);
+  margin-bottom: 8px;
+}
+
+/* ---------- Mobil uyum ---------- */
+@media (max-width: 420px) {
+  .brand h1 { font-size: 44px; }
+  .game-card .main-word { font-size: 40px; }
+  .timer { font-size: 36px; }
+  .score-team .num { font-size: 32px; }
+}
+
+/* ---------- Erişilebilirlik ---------- */
+button:focus-visible, input:focus-visible, .chip:focus-visible {
+  outline: 3px solid var(--purple-deep);
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}

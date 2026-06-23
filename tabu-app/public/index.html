@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Kelime Avı</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+
+  <div class="brand">
+    <h1>Kelime Avı</h1>
+    <div class="sub">kendi kelimelerinizle oynanan tabu</div>
+  </div>
+
+  <!-- ===================== EKRAN: GİRİŞ (oda kur / katıl) ===================== -->
+  <div id="screen-entry">
+    <div class="panel">
+      <div class="tape"></div>
+      <h2 class="section-title">Başlayalım</h2>
+      <button class="btn btn-primary" id="btn-create-room">Yeni oyun kur</button>
+      <div class="divider"></div>
+      <label for="join-code-input">Bir oda koduna katıl</label>
+      <input type="text" id="join-code-input" placeholder="örn. K7P2" maxlength="4" style="text-transform:uppercase">
+      <button class="btn btn-secondary mt-16" id="btn-join-room">Katıl</button>
+      <p class="small-note mt-16" id="entry-error" style="color:#EF4444;"></p>
+    </div>
+  </div>
+
+  <!-- ===================== EKRAN: LOBİ (ayarlar + kelime yönetimi) ===================== -->
+  <div id="screen-lobby" class="hidden">
+
+    <div class="room-code-box">
+      <div class="label">Oda kodu</div>
+      <div class="code" id="room-code-display">----</div>
+      <div class="hint">Arkadaşın bu kodla katılsın</div>
+    </div>
+
+    <div class="panel" id="join-form-panel">
+      <div class="tape"></div>
+      <h2 class="section-title">Sen kimsin?</h2>
+      <label for="my-name-input">Adın</label>
+      <input type="text" id="my-name-input" placeholder="örn. Ayşe" maxlength="20">
+      <label class="mt-16">Takımın</label>
+      <div class="chip-row" id="chip-my-team">
+        <div class="chip active" data-value="A">Takım 1</div>
+        <div class="chip" data-value="B">Takım 2</div>
+      </div>
+      <button class="btn btn-primary mt-16" id="btn-confirm-join">Onayla</button>
+    </div>
+
+    <div class="panel" id="players-panel" style="display:none;">
+      <h2 class="section-title">Oyuncular</h2>
+      <div id="players-list"></div>
+      <button class="btn btn-ghost" id="btn-edit-join">Adımı/takımımı değiştir</button>
+    </div>
+
+    <div class="panel" id="team-names-panel" style="display:none;">
+      <div class="tape"></div>
+      <h2 class="section-title">Takım isimleri</h2>
+      <label>Takım 1 adı</label>
+      <input type="text" id="team-a-name" placeholder="Takım 1" maxlength="20">
+      <label class="mt-16">Takım 2 adı</label>
+      <input type="text" id="team-b-name" placeholder="Takım 2" maxlength="20">
+      <p class="small-note mt-16">Sadece kurucu olarak değiştirebilirsin.</p>
+    </div>
+
+    <div class="panel" id="settings-panel" style="display:none;">
+      <h2 class="section-title">Süre</h2>
+      <div class="chip-row" id="chip-time">
+        <div class="chip" data-value="60">60 sn</div>
+        <div class="chip active" data-value="90">90 sn</div>
+        <div class="chip" data-value="120">120 sn</div>
+      </div>
+
+      <h2 class="section-title mt-24">Tabu hakkı</h2>
+      <p class="small-note" style="text-align:left; margin: -8px 0 12px;">Bir takım bu kadar tabu yaparsa oyun biter</p>
+      <div class="chip-row" id="chip-tabu">
+        <div class="chip" data-value="2">2</div>
+        <div class="chip active" data-value="3">3</div>
+        <div class="chip" data-value="4">4</div>
+      </div>
+
+      <h2 class="section-title mt-24">Pas hakkı</h2>
+      <p class="small-note" style="text-align:left; margin: -8px 0 12px;">Tur başına kullanılabilir</p>
+      <div class="chip-row" id="chip-pass">
+        <div class="chip" data-value="3">3</div>
+        <div class="chip active" data-value="5">5</div>
+        <div class="chip" data-value="10">10</div>
+      </div>
+    </div>
+
+    <div class="panel" id="settings-readonly-panel" style="display:none;">
+      <p class="small-note">Süre, tabu ve pas hakkı ayarlarını sadece oyunu kuran kişi değiştirebilir. Kelime eklemeye devam edebilirsin!</p>
+    </div>
+
+    <div class="panel">
+      <div class="tape"></div>
+      <h2 class="section-title">Kelimeler <span id="word-count" style="font-size:18px; color:var(--ink-soft);"></span></h2>
+
+      <div id="word-list"></div>
+
+      <div class="divider"></div>
+
+      <label>Ana kelime</label>
+      <input type="text" id="new-word-main" placeholder="örn. Rizz">
+      <label class="mt-16">Yasaklı kelimeler (4-5 tane)</label>
+      <div class="forbidden-inputs">
+        <input type="text" class="forb-input" placeholder="1">
+        <input type="text" class="forb-input" placeholder="2">
+        <input type="text" class="forb-input" placeholder="3">
+        <input type="text" class="forb-input" placeholder="4">
+        <input type="text" class="forb-input" placeholder="5 (opsiyonel)">
+      </div>
+      <button class="btn btn-secondary mt-16" id="btn-add-word">+ Kelime ekle</button>
+      <p class="small-note mt-16" id="word-error" style="color:#EF4444;"></p>
+    </div>
+
+    <button class="btn btn-primary hidden" id="btn-start-game">Oyunu başlat</button>
+    <p class="small-note hidden" id="non-host-wait-note">Oyunu kuran kişinin başlatmasını bekliyorsun...</p>
+  </div>
+
+  <!-- ===================== EKRAN: OYUN ===================== -->
+  <div id="screen-game" class="hidden">
+
+    <div class="score-row">
+      <div class="score-team" id="score-a">
+        <div class="name" id="score-a-name">Takım 1</div>
+        <div class="num" id="score-a-num">0</div>
+        <div class="tabus" id="score-a-tabu">tabu: 0</div>
+      </div>
+      <div class="vs">vs</div>
+      <div class="score-team" id="score-b">
+        <div class="name" id="score-b-name">Takım 2</div>
+        <div class="num" id="score-b-num">0</div>
+        <div class="tabus" id="score-b-tabu">tabu: 0</div>
+      </div>
+    </div>
+
+    <div class="timer-wrap">
+      <div class="timer" id="timer-display">90</div>
+    </div>
+
+    <p class="center small-note" id="turn-indicator" style="margin-bottom:14px;"></p>
+
+    <!-- Anlatıcının gördüğü kart -->
+    <div class="game-card" id="narrator-card">
+      <div class="tape"></div>
+      <div class="main-word" id="card-main">Kelime</div>
+      <div class="forbidden-list" id="card-forbidden"></div>
+    </div>
+
+    <!-- İzleyicilerin gördüğü bekleme kartı -->
+    <div class="game-card watching-card hidden" id="watching-card">
+      <div class="tape"></div>
+      <div class="watching-icon">👀</div>
+      <div class="watching-text"><span id="watching-narrator-name">—</span> anlatıyor</div>
+      <div class="watching-sub">Kelimeyi tahmin etmeye çalış!</div>
+    </div>
+
+    <div class="action-row three" id="narrator-actions">
+      <button class="btn btn-tabu" id="btn-tabu">Tabu!</button>
+      <button class="btn btn-pass" id="btn-pass">Pas</button>
+      <button class="btn btn-correct" id="btn-correct">Doğru</button>
+    </div>
+
+    <p class="small-note mt-16 hidden" id="pass-count"></p>
+    <button class="btn btn-ghost hidden" id="btn-end-turn">Turu bitir</button>
+  </div>
+
+  <!-- ===================== EKRAN: TUR SONU ===================== -->
+  <div id="screen-turnend" class="hidden">
+    <div class="panel center">
+      <div class="tape"></div>
+      <h2 class="section-title">Süre doldu!</h2>
+      <p id="turnend-text" style="font-size:16px; margin-bottom:20px;"></p>
+
+      <div class="score-row">
+        <div class="score-team" id="te-score-a">
+          <div class="name"></div>
+          <div class="num"></div>
+        </div>
+        <div class="vs">vs</div>
+        <div class="score-team" id="te-score-b">
+          <div class="name"></div>
+          <div class="num"></div>
+        </div>
+      </div>
+
+      <button class="btn btn-primary mt-16" id="btn-next-turn">Sıradaki takım, başla</button>
+      <p class="small-note mt-16 hidden" id="turnend-wait-note">Kurucunun sıradaki turu başlatmasını bekliyorsun...</p>
+    </div>
+
+    <div class="panel">
+      <h2 class="section-title">Son hareketler</h2>
+      <div class="log-list" id="log-list"></div>
+    </div>
+  </div>
+
+  <!-- ===================== EKRAN: OYUN SONU ===================== -->
+  <div id="screen-gameover" class="hidden">
+    <div class="panel center">
+      <div class="tape"></div>
+      <div class="winner-banner" id="winner-text">🎉 Kazandı!</div>
+      <div class="score-row mt-16">
+        <div class="score-team" id="go-score-a">
+          <div class="name"></div>
+          <div class="num"></div>
+        </div>
+        <div class="vs">vs</div>
+        <div class="score-team" id="go-score-b">
+          <div class="name"></div>
+          <div class="num"></div>
+        </div>
+      </div>
+      <button class="btn btn-primary mt-24" id="btn-restart">Yeni oyun</button>
+      <p class="small-note mt-16 hidden" id="gameover-wait-note">Kurucunun yeni oyun başlatmasını bekliyorsun...</p>
+    </div>
+  </div>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
